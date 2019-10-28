@@ -1,0 +1,20 @@
+[localhost]
+127.0.0.1
+
+[probes-machine]
+# PROBES' VM IP
+[probes-machine:vars]
+ansible_ssh_private_key_file=
+ansible_python_interpreter=/usr/bin/python3
+
+[auditing-server-machine]
+# AUDITING SERVER'S VM IP
+[auditing-server-machine:vars]
+ansible_ssh_private_key_file=
+ansible_python_interpreter=/usr/bin/python3
+
+[auditing-client-machine]
+# AUDITING CLIENT'S VM IP
+[auditing-client-machine:vars]
+ansible_ssh_private_key_file=
+ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,40 @@
+---
+- hosts: probes-machine
+  vars:
+    services_path: ../services
+    probes_dir_name: probes
+    fogbow_atm_components: ~/fogbow-atm-components/
+  tasks:
+    - name: Copying probes to Probes-Machine
+      copy:
+        src: "{{ item }}"
+        dest: "{{ fogbow_atm_components }}"
+      with_items:
+        - "{{ services_path }}/{{ probes_dir_name }}"
+
+- hosts: auditing-server-machine
+  vars:
+    services_path: ../services
+    auditing_server_dir_name: auditing-server
+    fogbow_atm_components: ~/fogbow-atm-components/
+  tasks:
+    - name: Copying auditing-server to Auditing-Server-Machine
+      copy:
+        src: "{{ item }}"
+        dest: "{{ fogbow_atm_components }}"
+        force: no
+      with_items:
+        - "{{ services_path }}/{{ auditing_server_dir_name }}"
+
+- hosts: auditing-client-machine
+  vars:
+    services_path: ../services
+    auditing_client_dir_name: auditing-client
+    fogbow_atm_components: ~/fogbow-atm-components/
+  tasks:
+    - name: Copying auditing-client to Auditing-Client-Machine
+      copy:
+        src: "{{ item }}"
+        dest: "{{ fogbow_atm_components }}"
+      with_items:
+        - "{{ services_path }}/{{ auditing_client_dir_name }}"
