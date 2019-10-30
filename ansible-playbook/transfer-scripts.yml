@@ -1,0 +1,10 @@
+---
+- hosts: auditing-server-machine
+  vars:
+    scripts_path: ../scripts/
+    remote_scripts_path: ~/fogbow-atm-components/auditing-server
+  tasks:
+    - name: Copy scripts
+      copy:
+        src: "{{ scripts_path }}"
+        dest: " {{ remote_scripts_path }} "

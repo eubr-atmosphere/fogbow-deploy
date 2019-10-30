@@ -33,7 +33,7 @@
     remote_keys_path: ~/fogbow-atm-components/auditing-server
     pub_key_suffix: .pub
   tasks:
-    - name: Copy pub key
+    - name: Copy client pub key
       copy:
         src: "{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
         dest: "{{ remote_keys_path }}"
