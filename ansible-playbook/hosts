@@ -1,6 +1,8 @@
 [localhost]
 127.0.0.1
 
+localhost ansible_connection=local
+
 [probes-machine]
 # PROBES' VM IP
 [probes-machine:vars]

@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  vars:
+    run: sh ../scripts/generate-ssh-key-pair
+    key_name_pattern: client_id
+    conf_file_path: ../conf-files/auditing-client.conf
+  tasks:
+    - name: Get key name
+      shell: grep "^{{ key_name_pattern }}" {{ conf_file_path }} | awk -F "=" '{print $2}'
+      register: key_name
+    - set_fact:
+        key_name: "{{ key_name.stdout }}"
+    - name: Generate auditing client keys
+      shell: "{{ run }} {{ key_name }}"
+
+- hosts: auditing-client-machine
+  vars:
+    remote_keys_path: ~/fogbow-atm-components/auditing-client
+    priv_key_suffix: .priv
+    pub_key_suffix: .pub
+  tasks:
+    - name: Copy pub key
+      copy:
+        src: "{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
+        dest: "{{ remote_keys_path }}"
+    - name: Copy priv key
+      copy:
+        src: "{{ hostvars['localhost']['key_name'] }}{{ priv_key_suffix }}"
+        dest: "{{ remote_keys_path }}"
+
+- hosts: auditing-server-machine
+  vars:
+    remote_keys_path: ~/fogbow-atm-components/auditing-server
+    pub_key_suffix: .pub
+  tasks:
+    - name: Copy pub key
+      copy:
+        src: "{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
+        dest: "{{ remote_keys_path }}"
+
+- hosts: localhost
+  tasks:
+    - name: Cleanup
+      shell: "rm -rf {{ hostvars['localhost']['key_name'] }}*"
