@@ -1,0 +1,30 @@
+---
+- hosts: probes-machine
+  vars:
+    deploy_script_runner: bash deploy-script.sh
+    probes_dir: ~/fogbow-atm-components/probes
+  tasks:
+    - name: Deploy probes
+      shell: "{{ deploy_script_runner }}"
+      args:
+        chdir: "{{ probes_dir }}"
+
+- hosts: auditing-client-machine
+  vars:
+    deploy_script_runner: bash deploy-script.sh
+    client_dir: ~/fogbow-atm-components/auditing-client
+  tasks:
+    - name: Deploy auditing client
+      shell: "{{ deploy_script_runner }}"
+      args:
+        chdir: "{{ client_dir }}"
+
+- hosts: auditing-server-machine
+  vars:
+    deploy_script_runner: bash deploy-script.sh
+    server_dir: ~/fogbow-atm-components/auditing-server
+  tasks:
+    - name: Deploy auditing server
+      shell: "{{ deploy_script_runner }}"
+      args:
+        chdir: "{{ server_dir }}"

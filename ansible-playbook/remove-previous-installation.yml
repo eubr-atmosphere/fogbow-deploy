@@ -1,0 +1,27 @@
+---
+- hosts: probes-machine
+  vars:
+    probes_dir: ~/fogbow-atm-components/probes
+  tasks:
+    - name: Removing probes
+      file:
+        state: absent
+        path: "{{ probes_dir }}"
+
+- hosts: auditing-client-machine
+  vars:
+    client_dir: ~/fogbow-atm-components/auditing-client
+  tasks:
+    - name: Removing auditing client
+      file:
+        state: absent
+        path: "{{ client_dir }}"
+
+- hosts: auditing-server-machine
+  vars:
+    server_dir: ~/fogbow-atm-components/auditing-server
+  tasks:
+    - name: Removing auditing server
+      file:
+        state: absent
+        path: "{{ server_dir }}"
