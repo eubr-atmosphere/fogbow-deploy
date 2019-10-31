@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /home/ubuntu/auditing
-
 SERVER_CONF_FILE_NAME="auditing-server.conf"
 SHARED_INFO="shared.info"
 CONF_FILE_PATH="$(pwd)/$SERVER_CONF_FILE_NAME"
@@ -12,7 +10,7 @@ cp $CONF_FILE_PATH auditing-server/database-setup/general.conf
 cd auditing-server/database-setup
 bash deploy-script.sh
 
-cd /home/ubuntu/auditing
+cd ../../
 
 sudo rm -rf auditing-server
 
@@ -35,7 +33,7 @@ sudo docker pull $IMAGE
 
 container_id=`sudo docker run --name $CONTAINER_NAME -p $SERVER_PORT:8080 -idt $IMAGE`
 
-sudo docker exec $container_id /bin/bash -c "mkdir src/main/resources/private"
+sudo docker exec $container_id /bin/bash -c "mkdir -p src/main/resources/private/clientkeys"
 sudo docker cp $CONF_FILE_PATH $container_id:/root/auditing-server/src/main/resources/private
 sudo docker cp ./application.properties $container_id:/root/auditing-server/src/main/resources/
 sudo bash generate-ssh-key-pair server-key 2048
@@ -43,4 +41,5 @@ mv server-key.priv private.key
 mv server-key.pub public.key
 sudo docker cp ./private.key $container_id:/root/auditing-server/src/main/resources/private
 sudo docker cp ./public.key $container_id:/root/auditing-server/src/main/resources/private
+sudo docker cp ./*.pub  $container_id:/root/auditing-server/src/main/resources/private/clientkeys
 sudo docker exec $container_id /bin/bash -c "mvn spring-boot:run -X > log.out 2> log.err" &
