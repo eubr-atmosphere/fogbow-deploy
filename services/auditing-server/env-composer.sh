@@ -13,13 +13,13 @@ yes | cp -f $CONF_FILE_SOURCE_DIR/$SERVICES_CONF_FILE_NAME $AUDITING_SERVER_SERV
 yes | cp -f $SHARED_INFO_FILE_PATH $AUDITING_SERVER_SERVICE_PATH
 
 CONF_FILE_PATH="$(pwd)/$AUDITING_SERVER_SERVICE_PATH/$SERVER_CONF_FILE_NAME"
-
+SECRETS_FILE_PATH="$(pwd)/$AUDITING_SERVER_SERVICE_PATH/$SECRETS_FILE"
 host_ip=$(grep ^host_ip $CONF_FILE_PATH | awk -F "=" '{print $2}')
 db_container_port=$(grep ^container_port CONF_FILE_PATH | awk -F "=" '{print $2}')
 db_name=$(grep ^db_name CONF_FILE_PATH | awk -F "=" '{print $2}')
 db_url=$host_ip:$db_container_port/$db_name
 db_user=$(grep ^db_user $CONF_FILE_PATH | awk -F "=" '{print $2}')
-db_password=$(grep ^db_password $CONF_FILE_PATH | awk -F "=" '{print $2}')
+db_password=$(grep ^db_password $SECRETS_FILE_PATH | awk -F "=" '{print $2}')
 
 APPLICATION_PROPERTIES_FILE_PATH="$(pwd)/services/auditing-server/application.properties"
 
