@@ -1,6 +1,6 @@
 ---
-- import_playbook: setup-conf-files.yml
 - import_playbook: remove-previous-installation.yml
+- import_playbook: setup-conf-files.yml
 - import_playbook: transfer-services.yml
 - import_playbook: transfer-scripts.yml
 - import_playbook: paste-auditing-keys.yml

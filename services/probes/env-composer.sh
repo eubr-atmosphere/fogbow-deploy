@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONF_FILE_SOURCE_DIR="$(pwd)/conf-files"
-PROBES_CONF_FILE_NAME="probes.conf"
+PROBES_CONF_FILE_NAME="probe-fogbow.conf"
 SERVICES_CONF_FILE_NAME="services.conf"
 CONF_FILE_DEST_DIR="services/probes"
 
@@ -11,7 +11,7 @@ yes | cp -f $CONF_FILE_SOURCE_DIR/cert.pem $CONF_FILE_DEST_DIR
 
 CONF_FILE="$(pwd)/services/probes/$PROBES_CONF_FILE_NAME"
 
-RAS_DB_URL=$(grep ^ras_db_url $CONF_FILE| awk -F "=" '{print $2}')/ras
+RAS_DB_URL=$(grep ^ras_db_url $CONF_FILE| awk -F "=" '{print $2}')
 DB_USERNAME=$(grep ^db_username $CONF_FILE| awk -F "=" '{print $2}')
 DB_PASSWORD=$(grep ^db_password $CONF_FILE| awk -F "=" '{print $2}')
 

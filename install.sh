@@ -29,7 +29,7 @@ sed -i "s#.*$PATTERN_HELPER = .*#$PATTERN_HELPER = $REMOTE_USER#g" $ANSIBLE_CFG_
 
 DEPLOY_FOGBOW_FILE_PATH="$(pwd)/ansible-playbook/deploy-fogbow.yml"
 
-(cd ansible-playbook && ansible-playbook $DEPLOY_FOGBOW_FILE_PATH)
+(cd ansible-playbook && ansible-playbook -vvv $DEPLOY_FOGBOW_FILE_PATH)
 
 chmod -R go-rw conf-files
 chmod -R go-rw services

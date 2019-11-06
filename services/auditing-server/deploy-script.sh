@@ -31,7 +31,7 @@ sudo docker stop $CONTAINER_NAME
 sudo docker rm $CONTAINER_NAME
 sudo docker pull $IMAGE
 
-container_id=`sudo docker run --name $CONTAINER_NAME -p $SERVER_PORT:8080 -idt $IMAGE`
+container_id=`sudo docker run --name $CONTAINER_NAME -p $SERVER_PORT:$SERVER_PORT -idt $IMAGE`
 
 sudo docker exec $container_id /bin/bash -c "mkdir -p src/main/resources/private/clientkeys"
 sudo docker cp $CONF_FILE_PATH $container_id:/root/auditing-server/src/main/resources/private

@@ -9,7 +9,7 @@ AUDITING_CLIENT_DIR="$SERVICES_DIR/auditing-server"
 
 SERVICES_LIST="$ROOT_DIR $PROBES_DIR $AUDITING_SERVER_DIR $AUDITING_CLIENT_DIR"
 
-for service in $SERVICE_LIST; do
+for service in $SERVICES_LIST; do
   echo ""
 	echo "Running $service/env-composer.sh"
 	echo ""
