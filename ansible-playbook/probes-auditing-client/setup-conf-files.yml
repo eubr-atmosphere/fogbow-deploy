@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
   vars:
-    script_runner: sh start-env-composers.sh
-    script_path: ../scripts/probes-auditing-client
+    script_runner: bash -x start-env-composers.sh
+    script_path: ../../scripts/probes-auditing-client
   tasks:
     - name: Setting up configuration files
       shell: "{{ script_runner }}"

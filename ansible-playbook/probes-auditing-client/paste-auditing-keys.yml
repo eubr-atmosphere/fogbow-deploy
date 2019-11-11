@@ -1,9 +1,9 @@
 ---
 - hosts: localhost
   vars:
-    run: sh ../scripts/generate-ssh-key-pair
+    run: sh ../../scripts/generate-ssh-key-pair
     key_name_pattern: client_id
-    conf_file_path: ../conf-files/auditing-client.conf
+    conf_file_path: ../../conf-files/auditing-client.conf
   tasks:
     - name: Get key name
       shell: grep "^{{ key_name_pattern }}" {{ conf_file_path }} | awk -F "=" '{print $2}'
@@ -39,7 +39,7 @@
         src: "{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
         dest: "{{ remote_keys_path }}"
     - name: Paste client pub key
-      shell: "{{ paste_key_runner }}{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
+      shell: "{{ paste_key_runner }} {{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
       become: yes
       args:
         chdir: "{{ remote_keys_path }}"

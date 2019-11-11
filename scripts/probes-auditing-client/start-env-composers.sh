@@ -1,9 +1,11 @@
 #!/bin/bash
 
-SERVICES_DIR="../../services"
+SERVICES_DIR="services"
 
 PROBES_DIR="$SERVICES_DIR/probes"
 AUDITING_CLIENT_DIR="$SERVICES_DIR/auditing-client"
+
+cd ../..
 
 SERVICES_LIST="$PROBES_DIR $AUDITING_CLIENT_DIR"
 

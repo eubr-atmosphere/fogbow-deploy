@@ -1,7 +1,7 @@
 ---
 - hosts: probes-machine
   vars:
-    services_path: ../services
+    services_path: ../../services
     probes_dir_name: probes
     fogbow_atm_components: "/home/{{ lookup('config', 'DEFAULT_REMOTE_USER')}}/fogbow-atm-components/"
   tasks:
@@ -14,7 +14,7 @@
 
 - hosts: auditing-client-machine
   vars:
-    services_path: ../services
+    services_path: ../../services
     auditing_client_dir_name: auditing-client
     fogbow_atm_components: "/home/{{ lookup('config', 'DEFAULT_REMOTE_USER')}}/fogbow-atm-components/"
   tasks:

@@ -18,9 +18,9 @@ REMOTE_USER=$(grep ^remote_hosts_user $HOSTS_CONF_FILE | awk -F "=" '{print $2}'
 PATTERN_HELPER="remote_user"
 sed -i "s#.*$PATTERN_HELPER = .*#$PATTERN_HELPER = $REMOTE_USER#g" $ANSIBLE_CFG_FILE
 
-DEPLOY_FOGBOW_FILE_PATH="auditing-server-only/deploy-server.yml"
+DEPLOY_FOGBOW_FILE_PATH="deploy-server.yml"
 
-(cd ansible-playbook && ansible-playbook -vvv $DEPLOY_FOGBOW_FILE_PATH)
+(cd ansible-playbook/auditing-server-only && ansible-playbook -vvv $DEPLOY_FOGBOW_FILE_PATH)
 
 chmod -R go-rw conf-files
 chmod -R go-rw services
