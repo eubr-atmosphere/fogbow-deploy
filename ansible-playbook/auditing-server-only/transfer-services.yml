@@ -1,0 +1,14 @@
+---
+- hosts: auditing-server-machine
+  vars:
+    services_path: ../services
+    auditing_server_dir_name: auditing-server
+    fogbow_atm_components: ~/fogbow-atm-components/
+  tasks:
+    - name: Copying auditing-server to Auditing-Server-Machine
+      copy:
+        src: "{{ item }}"
+        dest: "{{ fogbow_atm_components }}"
+        force: no
+      with_items:
+        - "{{ services_path }}/{{ auditing_server_dir_name }}"

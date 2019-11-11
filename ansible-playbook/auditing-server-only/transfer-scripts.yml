@@ -1,0 +1,16 @@
+---
+- hosts: auditing-server-machine
+  vars:
+    scripts_path: ../scripts
+    gen_keys_script_relative_path: generate-ssh-key-pair
+    paste_client_key_relative_path: auditing-server/paste_client_key.sh
+    remote_scripts_path: "/home/{{ lookup('config', 'DEFAULT_REMOTE_USER')}}/fogbow-atm-components/auditing-server/"
+  tasks:
+    - name: Copy scripts
+      become: yes
+      copy:
+        src: "{{ scripts_path }}"
+        dest: "{{ remote_scripts_path }}"
+      with_items:
+        - "{{ scripts_path }}/{{ gen_keys_script_relative_path }}"
+        - "{{ scripts_path }}/{{ paste_client_key_relative_path }}"

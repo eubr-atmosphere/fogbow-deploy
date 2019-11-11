@@ -1,8 +1,7 @@
 #!/bin/bash
 DIR=$(pwd)
-CONF_FILES_DIR=$DIR/"conf-files"
+CONF_FILES_DIR=../../"conf-files"
 SECRETS_FILE_PATH=$CONF_FILES_DIR/"secrets"
-SHARED_INFO_FILE=$CONF_FILES_DIR/"shared.info"
 
 DB_PASSWORD_PROPERTY="db_password"
 

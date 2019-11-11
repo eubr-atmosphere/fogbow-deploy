@@ -10,17 +10,6 @@
       args:
         chdir: "{{ client_dir }}"
 
-- hosts: auditing-server-machine
-  vars:
-    deploy_script_runner: bash -x deploy-script.sh
-    server_dir: "/home/{{ lookup('config', 'DEFAULT_REMOTE_USER')}}/fogbow-atm-components/auditing-server"
-  tasks:
-    - name: Deploy auditing server
-      shell: "{{ deploy_script_runner }}"
-      become: yes
-      args:
-        chdir: "{{ server_dir }}"
-
 - hosts: probes-machine
   vars:
     deploy_script_runner: bash deploy-script.sh
@@ -28,6 +17,6 @@
   tasks:
     - name: Deploy probes
       shell: "{{ deploy_script_runner }}"
-      become: yes'
+      become: yes
       args:
         chdir: "{{ probes_dir }}"

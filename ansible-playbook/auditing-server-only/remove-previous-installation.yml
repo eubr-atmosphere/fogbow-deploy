@@ -1,0 +1,10 @@
+---
+- hosts: auditing-server-machine
+  vars:
+    server_dir: "/home/{{ lookup('config', 'DEFAULT_REMOTE_USER')}}/fogbow-atm-components/auditing-server/"
+  tasks:
+    - name: Removing auditing server
+      become: yes
+      file:
+        state: absent
+        path: "{{ server_dir }}"

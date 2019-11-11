@@ -32,11 +32,17 @@
   vars:
     remote_keys_path: "/home/{{ lookup('config', 'DEFAULT_REMOTE_USER')}}/fogbow-atm-components/auditing-server"
     pub_key_suffix: .pub
+    paste_key_runner: bash paste_client_key.sh
   tasks:
     - name: Copy client pub key
       copy:
         src: "{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
         dest: "{{ remote_keys_path }}"
+    - name: Paste client pub key
+      shell: "{{ paste_key_runner }}{{ hostvars['localhost']['key_name'] }}{{ pub_key_suffix }}"
+      become: yes
+      args:
+        chdir: "{{ remote_keys_path }}"
 
 - hosts: localhost
   tasks:
