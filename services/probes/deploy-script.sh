@@ -28,6 +28,7 @@ sudo docker cp ./fogbow-site-probe/probes $container_id:/app/
 sudo docker cp $CONF_FILE $container_id:/app/probes/src/main/resources/private
 sudo docker cp ./cert.pem $container_id:/app/
 sudo docker cp ./cert.pem $container_id:/app/java-client-lib
+sudo docker cp ./cert.pem $container_id:/app/probes
 sudo docker exec $container_id /bin/bash -c "sed -i 's,$endpoint_attr.*,$endpoint_attr\"$ip\";,' /app/java-client-lib/src/main/java/eu/atmosphere/tmaf/monitor/client/MonitorClient.java"
 sudo docker cp ./application.properties $container_id:/app/probes/src/main/resources
 sudo docker exec $container_id /bin/bash -c "rm -rf /usr/share/maven/boot/plexus-classworlds-2.5.2.jar"
