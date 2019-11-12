@@ -19,6 +19,8 @@ CONF_FILE=probe-fogbow.conf
 ip=`awk -F ' *= *' '$1=="monitor_ip"{print $2}' $CONF_FILE`/monitor
 endpoint_attr="DEFAULT_ENDPOINT ="
 
+sudo docker stop $CONTAINER_NAME
+sudo docker rm $CONTAINER_NAME
 sudo docker pull $IMAGE
 container_id=`sudo docker run --name $CONTAINER_NAME -idt $IMAGE`
 sudo docker cp ./fogbow-site-probe/java-client-lib $container_id:/app/
